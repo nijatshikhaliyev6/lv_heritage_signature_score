@@ -2,7 +2,7 @@
 
 **Does the form of a Louis Vuitton object carry the identity of the House independently of the Monogram?**
 
-Independent research by Nijat Shikhaliyev, 2025.
+Independent research by Nijat Shikhaliyev, 2026.
 
 ## Overview
 
