@@ -4,7 +4,7 @@ import pandas as pd
 import statsmodels.api as sm
 from scipy import stats
 
-wb = openpyxl.load_workbook('LV_Heritage_Signature_Score__4_.xlsx', data_only=True)
+wb = openpyxl.load_workbook('LV_Heritage_Signature_Score.xlsx', data_only=True)
 ws = wb['6_SURVEY']
 
 CATEGORY = {
@@ -27,7 +27,6 @@ for r in range(5, 35):
     answered = ws.cell(r, 23).value
     m = re.search(r'\b(1[89]\d{2}|20[0-2]\d)\b', str(name))
     year = int(m.group(1)) if m else None
-    if n == 1: iconic = 'yes'
     rows.append(dict(n=n, name=name, brand=brand, iconic=iconic, S6=S6,
                       category=CATEGORY[n], year=year, shown=shown, answered=answered))
 
@@ -68,25 +67,25 @@ def fit_quasi_manual(endog, exog, label, df_extra=None):
     print(table.round(4).to_string())
     return table, disp, mcfadden_r2
 
-print('MODEL A — All 30 stimuli: S6 + category (ref: bag) + brand (LV vs control)')
-endog_A = df[['successes','failures']].values
-exog_A = pd.get_dummies(df[['S6','category','is_lv']], columns=['category'], drop_first=True).astype(float)
-exog_A = sm.add_constant(exog_A)
-exog_A.columns = ['const','S6','is_lv','category_box','category_suitcase','category_trunk']
-exog_A = exog_A[['const','S6','category_box','category_suitcase','category_trunk','is_lv']]
-tA, dispA, r2A = fit_quasi_manual(endog_A, exog_A, 'MODEL A')
-
-print('\nMODEL B — Louis Vuitton objects only (n=20): S6 + category + iconic + year')
-dflv = df[df['is_lv']==1].copy()
-dflv['year_c'] = (dflv['year'] - dflv['year'].mean()) / 10
-endog_B = dflv[['successes','failures']].values
-exog_B = pd.get_dummies(dflv[['S6','category','iconic_bin','year_c']], columns=['category'], drop_first=True).astype(float)
+print('MODEL B — All 30 stimuli: S6 + category (ref: bag) + brand (LV vs control)')
+endog_B = df[['successes','failures']].values
+exog_B = pd.get_dummies(df[['S6','category','is_lv']], columns=['category'], drop_first=True).astype(float)
 exog_B = sm.add_constant(exog_B)
-exog_B.columns = ['const','S6','iconic_bin','year_c','category_box','category_suitcase','category_trunk']
-exog_B = exog_B[['const','S6','category_box','category_suitcase','category_trunk','iconic_bin','year_c']]
+exog_B.columns = ['const','S6','is_lv','category_box','category_suitcase','category_trunk']
+exog_B = exog_B[['const','S6','category_box','category_suitcase','category_trunk','is_lv']]
 tB, dispB, r2B = fit_quasi_manual(endog_B, exog_B, 'MODEL B')
 
-tA.to_csv('modelA_quasi.csv')
+print('\nMODEL C — Louis Vuitton objects only (n=20): S6 + category + iconic + year')
+dflv = df[df['is_lv']==1].copy()
+dflv['year_c'] = (dflv['year'] - dflv['year'].mean()) / 10
+endog_C = dflv[['successes','failures']].values
+exog_C = pd.get_dummies(dflv[['S6','category','iconic_bin','year_c']], columns=['category'], drop_first=True).astype(float)
+exog_C = sm.add_constant(exog_C)
+exog_C.columns = ['const','S6','iconic_bin','year_c','category_box','category_suitcase','category_trunk']
+exog_C = exog_C[['const','S6','category_box','category_suitcase','category_trunk','iconic_bin','year_c']]
+tC, dispC, r2C = fit_quasi_manual(endog_C, exog_C, 'MODEL C')
+
 tB.to_csv('modelB_quasi.csv')
+tC.to_csv('modelC_quasi.csv')
 df.to_csv('regression_data.csv', index=False)
-print('\nSaved modelA_quasi.csv, modelB_quasi.csv, regression_data.csv')
+print('\nSaved modelB_quasi.csv, modelC_quasi.csv, regression_data.csv')

@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 import statsmodels.api as sm
 
-wb = openpyxl.load_workbook('LV_Heritage_Signature_Score__4_.xlsx', data_only=True)
+wb = openpyxl.load_workbook('LV_Heritage_Signature_Score.xlsx', data_only=True)
 ws = wb['3_OBJECTS']
 
 rows = []

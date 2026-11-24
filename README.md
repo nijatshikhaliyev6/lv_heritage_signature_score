@@ -4,6 +4,8 @@
 
 **Independent research by Nijat Shikhaliyev**
 
+> **Correction notice, 24 November 2026.** One survey object (#131) was coded inconsistently as iconic or non-iconic. As a result, several values reported in the research report have changed, and one statement about Model C has been withdrawn. The report, [`Heritage_Signature_Score_Final.pdf`](Heritage_Signature_Score_Final.pdf), has not been altered and **must be read together with the [Correction Notice](HSS_Correction_Notice_2026-11-24.pdf)** ([text version](HSS_Correction_Notice_2026-11-24.md)), which lists every affected value page by page. The figures in this README already reflect the correction.
+
 This repository contains the data, methodology, scoring framework, survey results, and reproducible analyses for the **Heritage Signature Score**, a quantitative study of Louis Vuitton's visual and structural design language from 1854 to 2025.
 
 The study examines **400 catalogued Louis Vuitton objects spanning 170 years** and tests whether structural form alone — without the Monogram, Damier canvas, colour, material, or visible branding — is associated with recognition as Louis Vuitton.
@@ -133,17 +135,19 @@ The structural score therefore shows a positive bivariate association with recog
 
 ### 3. The association strengthens among non-iconic models
 
-For the 18 non-iconic objects:
+For the 19 non-iconic objects:
 
 **S6 → recognition:**  
-`r = +0.573, p = 0.013`
+`r = +0.569, p = 0.011`
 
-For the eight non-iconic Louis Vuitton objects:
+For the nine non-iconic Louis Vuitton objects:
 
 **S6 → recognition:**  
-`r = +0.716, p = 0.046`
+`r = +0.685, p = 0.042`
 
 The final subset is small and should therefore be interpreted cautiously.
+
+*Figures in this section were corrected on 24 November 2026. See the [Correction Notice](HSS_Correction_Notice_2026-11-24.pdf).*
 
 ---
 
@@ -192,7 +196,9 @@ Controls for:
 
 S6 again remained positive but did not reach the conventional significance threshold:
 
-`β = +4.129, p = 0.100`
+`β = +3.983, p = 0.122`
+
+*Figures in this section were corrected on 24 November 2026. See the [Correction Notice](HSS_Correction_Notice_2026-11-24.pdf).*
 
 ### Model D — Trunks only
 
@@ -288,6 +294,12 @@ Black silhouettes remove not only branding but also colour, material, texture, a
 Survey respondents were recruited opportunistically rather than through a representative population sampling frame.
 
 Accordingly, the recognition results should not be interpreted as population-level estimates or as causal evidence.
+
+---
+
+## Corrections
+
+Corrections made after first publication are documented, with their effect on the reported results, in the [Correction Notice of 24 November 2026](HSS_Correction_Notice_2026-11-24.pdf) ([text version](HSS_Correction_Notice_2026-11-24.md)). The research report must be read together with it.
 
 ---
 
