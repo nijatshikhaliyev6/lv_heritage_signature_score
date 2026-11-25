@@ -1,337 +1,112 @@
-# Heritage Signature Score — Louis Vuitton, 1854–2025
+# The Heritage Signature Score
 
-### Can the form of a Louis Vuitton object carry the identity of the House independently of the Monogram?
+### Louis Vuitton, 1854–2025
 
-**Independent research by Nijat Shikhaliyev**
+*Can structural form signal a house identity without the Monogram?*
 
-> **Correction notice, 24 November 2026.** One survey object (#131) was coded inconsistently as iconic or non-iconic. As a result, several values reported in the research report have changed, and one statement about Model C has been withdrawn. The report, [`Heritage_Signature_Score_Final.pdf`](Heritage_Signature_Score_Final.pdf), has not been altered and **must be read together with the [Correction Notice](HSS_Correction_Notice_2026-11-24.pdf)** ([text version](HSS_Correction_Notice_2026-11-24.md)), which lists every affected value page by page. The figures in this README already reflect the correction.
+**Nijat Shikhaliyev** · Independent research
 
-This repository contains the data, methodology, scoring framework, survey results, and reproducible analyses for the **Heritage Signature Score**, a quantitative study of Louis Vuitton's visual and structural design language from 1854 to 2025.
-
-The study examines **400 catalogued Louis Vuitton objects spanning 170 years** and tests whether structural form alone — without the Monogram, Damier canvas, colour, material, or visible branding — is associated with recognition as Louis Vuitton.
-
-A separate recognition experiment used **30 black silhouettes and 3,000 independent respondent-stimulus observations** to test whether objects that remain structurally closer to the House's historical design language are more likely to be identified as Louis Vuitton.
+**[Read the research report (PDF)](Heritage_Signature_Score_Research_Report.pdf)** · [Interactive Louis Vuitton Heritage Atlas](https://louis-vuitton-beryl.vercel.app/)
 
 ---
 
-## Research Question
+## Research question
 
-Louis Vuitton is one of the world's most recognizable luxury houses, but much of that recognition is commonly associated with its surface codes, particularly the Monogram canvas introduced in 1896.
+Louis Vuitton is among the world's most recognisable houses, and its identity is often associated with the Monogram canvas introduced in 1896. This study asks whether an object's form carries recognisable information even when branding is removed. If an object were reduced to a black silhouette, would it still be identified as Louis Vuitton?
 
-This study asks a narrower question:
+## Method
 
-> **If the Monogram were removed — if an object were reduced to its form — would it still be identifiable as Louis Vuitton?**
+### Catalogue and feature ratings
 
-To investigate this, the study develops a quantitative **Heritage Signature Score (HSS)** measuring how closely an object's visual structure corresponds to Louis Vuitton's historical design profile.
+The catalogue contains **400 Louis Vuitton objects dated 1854–2025**. Each object was coded on eight visible features using a written 1–5 rating scale, then normalised to the interval [0, 1].
 
----
-
-## Dataset
-
-The catalogue contains **400 Louis Vuitton objects produced between 1854 and 2025**.
-
-Each object is independently described using eight visual features scored from 1 to 5:
-
-| Feature | What it measures |
+| Feature | Definition |
 |---|---|
-| `rigidity` | Whether the object holds its shape when empty |
-| `edge_straightness` | Straightness of the body's edges |
-| `geometry` | Whether the outline reduces to a simple geometric figure |
-| `symmetry` | Mirror symmetry around the vertical axis |
-| `ornament_density` | Share of the surface covered by repeating pattern |
-| `ornament_regularity` | Regularity of the repeating pattern |
-| `hardware` | Number of visible metal elements |
-| `travel_function` | Degree to which the object is designed for carrying goods |
+| `rigidity` | Stiffness of the body |
+| `edge_straightness` | Straightness of outline edges |
+| `geometry` | Reduction to simple geometric forms |
+| `symmetry` | Vertical mirror symmetry |
+| `ornament_density` | Share of patterned surface |
+| `ornament_regularity` | Periodicity of pattern |
+| `hardware` | Count of visible metal elements |
+| `travel_function` | Role in carrying goods while travelling |
 
-All ratings use predefined written criteria reproduced in the research report.
+### S8 and S6
 
----
+The historical reference vector is the feature-wise median of the **124 catalogue objects dated 1854–1949** (107 of them trunks). If *x<sub>j</sub>* is an object's normalised score for a feature and *m<sub>j</sub>* its historical median, the score over *k* included features is
 
-## The Heritage Signature Score
+**S = 1 − (1 / k) Σ |x<sub>j</sub> − m<sub>j</sub>|**
 
-The historical reference profile is defined as the median feature profile of the **124 objects produced between 1854 and 1949**.
+S = 1 represents an exact match to the historical median profile and S = 0 represents maximum mean deviation.
 
-For an object with normalized feature vector `x` and historical reference vector `r`:
+- **S8** uses all eight normalised features.
+- **S6** removes `ornament_density` and `ornament_regularity`, so that the score does not incorporate surface-pattern information.
 
-**S = 1 − mean(|x − r|)**
+### Recognition survey
 
-where:
+The recognition survey involved **3,000 participants across Azerbaijan, Georgia, London, and the San Francisco Bay Area**. It presented **30 black silhouettes**: 20 Louis Vuitton objects and ten objects from Goyard, Moynat, Au Départ, Globe-Trotter, Innovation, Hermès and Bottega Veneta. Each silhouette was assessed by 100 participants, who answered the question *"Is this a Louis Vuitton object?"* The analyses use the 30 stimulus-level aggregate counts.
 
-- **S = 1** represents an exact match to the historical reference profile
-- **S = 0** represents maximum possible deviation
+## Principal results
 
-Two versions of the score are calculated.
+### The score over time (trunks)
 
-### S8 — Full Heritage Signature Score
+| Period | Catalogue objects | Trunks | S8, trunks | S6, trunks |
+|---|---:|---:|---:|---:|
+| 1854–1899 | 43 | 42 | 0.985 | 0.980 |
+| 1900–1949 | 81 | 65 | 0.816 | 0.975 |
+| 1950–1999 | 133 | 47 | 0.765 | 0.969 |
+| 2000–2025 | 143 | 34 | 0.738 | 0.938 |
 
-Uses all eight features, including ornament.
+### Score and recognition (Pearson correlations)
 
-### S6 — Structural Heritage Signature Score
+| Subset | n | S8 r | S8 p | S6 r | S6 p |
+|---|---:|---:|---:|---:|---:|
+| All silhouettes | 30 | −0.076 | 0.688 | +0.434 | 0.017 |
+| Louis Vuitton only | 20 | −0.001 | 0.995 | +0.505 | 0.023 |
+| Non-iconic objects | 19 | +0.117 | 0.634 | +0.569 | 0.011 |
+| LV, non-iconic only | 9 | +0.132 | 0.734 | +0.685 | 0.042 |
 
-Removes:
+Across the 20 Louis Vuitton stimuli the mean affirmative rate was 51.35%, compared with 30.6% for the ten control-brand stimuli.
 
-- `ornament_density`
-- `ornament_regularity`
+### Regression and sensitivity analyses
 
-S6 therefore measures structural similarity independently of repeating surface ornament and is the primary index used to test whether form itself carries recognizable House identity.
+| Model | Sample and method | Result |
+|---|---|---|
+| A | 400 objects · OLS, HC3 robust SE · S6 on year, category, iconic status | Iconic model +0.013, p = 0.289 · R² = 0.725 |
+| B | 30 stimuli · quasi-binomial GLM · S6, category, brand | S6 +2.477, p = 0.228 |
+| C | 20 Louis Vuitton stimuli · quasi-binomial GLM · S6, category, iconic status, year | S6 +3.983, p = 0.122 · year +0.144 per decade, p = 0.095 |
+| D | 12 trunk stimuli · quasi-binomial GLM · S6, brand | S6 +9.882, p = 0.142 · bivariate r = +0.488, p = 0.108 |
 
----
+These results support an exploratory, correlational finding rather than a demonstrated independent effect of structural form.
 
-## Recognition Experiment
+## Data and analysis files
 
-Thirty objects were converted into black silhouettes:
+| File | Contents |
+|---|---|
+| [`Heritage_Signature_Score_Research_Report.pdf`](Heritage_Signature_Score_Research_Report.pdf) | Research report, revised November 2026, with its revision history |
+| [`LV_Heritage_Signature_Score.xlsx`](LV_Heritage_Signature_Score.xlsx) | Research workbook (see sheets below) |
+| [`model_A_analysis.py`](model_A_analysis.py) | Model A; writes `modelA_full400.csv` (coefficients) and `modelA_full400_data.csv` (model input) |
+| [`models_BC_analysis.py`](models_BC_analysis.py) | Models B and C; writes `modelB_quasi.csv`, `modelC_quasi.csv` and `regression_data.csv` (model input) |
+| `modelA_full400.csv`, `modelA_full400_data.csv`, `modelB_quasi.csv`, `modelC_quasi.csv` | Model outputs as reported |
+| [`archive/`](archive/) | Earlier versions kept for provenance: the September 2026 report, the November 2026 correction notice and earlier regression notes |
 
-- **20 Louis Vuitton objects**, dating from 1860 to 2023
-- **10 control objects** from other houses and luggage manufacturers
+Workbook sheets:
 
-The control set includes objects from Goyard, Moynat, Au Départ, Globe-Trotter, Innovation, Hermès, and Bottega Veneta.
+| Sheet | Contents |
+|---|---|
+| `1_METHOD` | Summary of the method |
+| `2_SCALES` | Written 1–5 definitions of the eight features |
+| `3_OBJECTS` | The 400 catalogued objects: sources, ratings, normalised values, S8 and S6 |
+| `4_BENCHMARK` | Historical reference profile (1854–1949) and 2000–2025 medians |
+| `5_TIMELINE` | Scores by decade and by period, for all objects and for trunks |
+| `6_SURVEY` | The 30 recognition stimuli: ratings, S8, S6 and aggregate recognition counts |
+| `7_RESULTS` | Summary correlations |
+| `8_COVERAGE` | Catalogue composition by decade and object type |
 
-Respondents saw one silhouette and answered a single question:
+To reproduce Models A–C:
 
-> **Is this a Louis Vuitton object?**
-
-Each silhouette was evaluated by an **independent cohort of 100 respondents**.
-
-No respondent evaluated more than one stimulus.
-
-The resulting experiment therefore contains:
-
-**30 stimuli × 100 respondents = 3,000 independent respondent-stimulus observations**
-
----
-
-## Main Results
-
-### 1. Structural continuity across 170 years
-
-When the analysis is restricted to trunks — the only object category represented continuously across the full historical period — the structural score remains remarkably stable:
-
-| Period | S6 | S8 |
-|---|---:|---:|
-| 1854–1899 | 0.980 | 0.985 |
-| 1900–1949 | 0.975 | 0.816 |
-| 1950–1999 | 0.969 | 0.765 |
-| 2000–2025 | 0.937 | 0.738 |
-
-Across approximately 170 years, S6 declines only modestly, while S8 declines substantially.
-
-**The structure held. The surface changed.**
-
----
-
-### 2. Structural similarity is associated with recognition
-
-Across all 30 survey silhouettes:
-
-**S6 → recognition:**  
-`r = +0.434, p = 0.017`
-
-**S8 → recognition:**  
-`r = −0.076, p = 0.688`
-
-The structural score therefore shows a positive bivariate association with recognition in the present stimulus sample, whereas the full score including ornament does not.
-
----
-
-### 3. The association strengthens among non-iconic models
-
-For the 19 non-iconic objects:
-
-**S6 → recognition:**  
-`r = +0.569, p = 0.011`
-
-For the nine non-iconic Louis Vuitton objects:
-
-**S6 → recognition:**  
-`r = +0.685, p = 0.042`
-
-The final subset is small and should therefore be interpreted cautiously.
-
-*Figures in this section were corrected on 24 November 2026. See the [Correction Notice](HSS_Correction_Notice_2026-11-24.pdf).*
-
----
-
-## Controlled Analyses
-
-The repository also contains four robustness models designed to test alternative explanations for the observed relationship.
-
-### Model A — Full 400-object catalogue
-
-OLS model predicting S6 from:
-
-- production year
-- object category
-- iconic status
-
-`n = 400`
-
-`R² = 0.725`
-
-Iconic status was not significantly associated with S6 after controlling for category and year (`p = 0.289`), suggesting that the structural index is not simply measuring model fame.
-
-### Model B — All survey stimuli
-
-Quasi-binomial recognition model controlling for:
-
-- S6
-- category
-- Louis Vuitton/control status
-
-`n = 30`
-
-The S6 coefficient remained positive but was not statistically significant:
-
-`β = +2.477, p = 0.228`
-
-### Model C — Louis Vuitton objects only
-
-Controls for:
-
-- S6
-- category
-- iconic status
-- production year
-
-`n = 20`
-
-S6 again remained positive but did not reach the conventional significance threshold:
-
-`β = +3.983, p = 0.122`
-
-*Figures in this section were corrected on 24 November 2026. See the [Correction Notice](HSS_Correction_Notice_2026-11-24.pdf).*
-
-### Model D — Trunks only
-
-Holding category constant by restricting the sample to trunks:
-
-`r = +0.488, p = 0.108` for LV + control trunks
-
-`r = +0.325, p = 0.432` for Louis Vuitton trunks only
-
-These controlled analyses substantially narrow the interpretation of the bivariate findings. The present data support a **consistently positive but statistically inconclusive independent association** once category and brand are accounted for.
-
----
-
-## Inter-Rater Reliability
-
-To test whether the scoring framework could be reproduced independently, a **stratified random sample of 100 of the 400 objects (25%)** was re-coded by a second rater.
-
-The second rater:
-
-- used the same written definitions
-- worked independently
-- received no additional scoring instruction
-- was blinded to the original ratings
-
-Reliability was evaluated using **ICC(2,1)** and weighted Cohen's κ.
-
-Feature-level ICCs ranged from:
-
-`0.87 – 0.96`
-
-Composite-score reliability was:
-
-| Index | ICC(2,1) |
-|---|---:|
-| S6 | **0.980** |
-| S8 | **0.986** |
-
-These results indicate high reproducibility of the scoring framework.
-
----
-
-## Interpretation
-
-The study does **not** claim that structural form causes Louis Vuitton recognition.
-
-Instead, it establishes a narrower result:
-
-> Within the present silhouette sample, objects structurally closer to Louis Vuitton's historical design profile tended to receive higher Louis Vuitton recognition rates after visible branding was removed.
-
-The bivariate relationship is statistically significant, but the controlled models do not establish an independent S6 effect once category, brand, iconic status, and year are considered.
-
-The Heritage Signature Score should therefore be understood primarily as a **measurement instrument** for quantifying continuity and change in design language.
-
----
-
-## Repository Contents
-
-This repository contains the materials required to inspect, reproduce, and extend the study, including:
-
-- the 400-object catalogue
-- object-level feature ratings
-- source links
-- historical reference-profile calculations
-- S6 and S8 calculations
-- recognition-survey data
-- survey stimuli
-- inter-rater reliability data
-- statistical analyses
-- figures and tables used in the final report
-
-See the individual folders and files for documentation of each component.
-
----
-
-## Reproducibility
-
-The scoring rules were fixed before the recognition survey was conducted.
-
-The eight features, historical reference period, S6/S8 definitions, and scoring formula were not altered after survey results were observed.
-
-The repository is intended to make the study auditable: the reported tables and figures can be reconstructed from the underlying data.
-
----
-
-## Limitations
-
-The recognition experiment contains only 30 stimuli, limiting statistical power in controlled and subset analyses.
-
-The historical reference profile is heavily composed of trunks because trunks dominate Louis Vuitton's pre-1950 output.
-
-Black silhouettes remove not only branding but also colour, material, texture, and hardware finish.
-
-Survey respondents were recruited opportunistically rather than through a representative population sampling frame.
-
-Accordingly, the recognition results should not be interpreted as population-level estimates or as causal evidence.
-
----
-
-## Corrections
-
-Corrections made after first publication are documented, with their effect on the reported results, in the [Correction Notice of 24 November 2026](HSS_Correction_Notice_2026-11-24.pdf) ([text version](HSS_Correction_Notice_2026-11-24.md)). The research report must be read together with it.
-
----
-
-## Heritage Atlas
-
-The dataset can also be explored through the interactive **Louis Vuitton Heritage Atlas**, which presents the catalogue across objects and decades.
-
-**Heritage Atlas:**  
-https://louis-vuitton-beryl.vercel.app
-
----
-
-## Citation
-
-If you use the dataset, scoring framework, or results in academic or design research, please cite:
-
-> **Shikhaliyev, Nijat. (2026). _The Heritage Signature Score: Louis Vuitton, 1854–2025._ Independent Research.**
-
----
-
-## Author
-
-**Nijat Shikhaliyev**  
-Independent Researcher  
-Baku, Azerbaijan
-
----
-
-## Disclaimer
-
-This is an independent academic research project.
-
-It is not affiliated with, commissioned by, or endorsed by Louis Vuitton, LVMH, or any of the other brands represented in the comparative dataset.
-
-All trademarks and brand names remain the property of their respective owners.
+```bash
+pip install pandas numpy scipy statsmodels openpyxl
+python model_A_analysis.py
+python models_BC_analysis.py
+```
